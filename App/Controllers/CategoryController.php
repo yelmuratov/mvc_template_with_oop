@@ -3,15 +3,11 @@
 
     class CategoryController{
         public function index(){
-            echo "<pre>";
-            print_r("CategoryController@index");
-            echo "</pre>";
+            include realpath(__DIR__ . "/../Views/students/index.php");
         }
 
-        public function test(){
-            echo "<pre>";
-            print_r("CategoryController@test");
-            echo "</pre>";
+        public function products(){
+            include realpath(__DIR__ . "/../Views/products/index.php");
         }
     }   
 ?>
