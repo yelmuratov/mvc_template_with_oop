@@ -31,9 +31,6 @@
                 $controller = new $action[0]();
                 $method = $action[1];
 
-                echo "<pre>";
-                print_r($action);
-                echo "</pre>";
                 return $controller->$method();
             }
             

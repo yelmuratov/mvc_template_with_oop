@@ -8,7 +8,14 @@
         private static $database = 'test';
         
         public static function connect(){
-            return new PDO("mysql:host" . self::$host . ";dbname=" . self::$database, self::$user, self::$password);
+            try{
+                $conn = new PDO("mysql:host=".self::$host.";dbname=".self::$database, self::$user, self::$password);
+                $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+                return $conn;
+            }catch(PDOException $e){
+                echo "Error while connecting to the database: " . $e->getMessage();
+                echo "Connection failed: " . $e->getMessage();
+            }
         }
 
     }

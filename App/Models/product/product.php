@@ -1,8 +1,8 @@
 <?php
-    namespace App\Models\Product;
+    namespace App\Models\product;
     use App\Models\Model;
 
     class Product extends Model{
-        protected $table = 'products';
+        public static $table = 'products';
     }
 ?>

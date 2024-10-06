@@ -1,5 +1,7 @@
 <?php
     namespace App\Controllers;
+    use App\Models\Product\Product;
+    use App\Models\Student\Student;
 
     class CategoryController{
         public function index(){

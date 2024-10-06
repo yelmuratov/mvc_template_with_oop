@@ -1,12 +1,14 @@
 <?php
     namespace App\Models;
     use App\Database\DB;
+    use PDO;
 
     class Model extends DB{
         public static function getAll(){
             $db = self::connect();
-            $query = $db->query("SELECT * FROM " . static::$table);
-            return $query->fetchAll();
+            $sql = "SELECT * FROM " . static::$table;
+            $query = $db->query($sql);
+            return $query->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public static function create($data){
@@ -36,6 +38,20 @@
             $data['id'] = $id;
             $query = $db->prepare($sql);
             return $query->execute($data);
+        }
+
+        public static function count(){
+            $db = self::connect();
+            $sql = "SELECT COUNT(*) FROM " . static::$table;
+            $query = $db->query($sql);
+            return $query->fetchColumn();
+        }
+
+        public static function paginate($page, $limit){
+            $db = self::connect();
+            $sql = "SELECT * FROM " . static::$table . " LIMIT " . $limit . " OFFSET " . ($page - 1) * $limit;
+            $query = $db->query($sql);
+            return $query->fetchAll(PDO::FETCH_ASSOC);
         }
     }
 ?>
