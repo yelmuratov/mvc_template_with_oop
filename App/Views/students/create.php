@@ -10,21 +10,33 @@
     <div class="container mt-4">
     <a href="/students" class='btn btn-primary'>Back</a>
     <h1>Student create</h1>
-    <form action="/create_st" method="post">
+    <?php
+        if(isset($_SESSION['student_create'])){
+            echo "<div class='alert alert-success'>".$_SESSION['student_create']."</div>";
+            unset($_SESSION['student_create']);
+        }
+    ?>
+    <form action="/create_st" method="post" id="myForm">
         <div>
             <label for="name">Name</label>
-            <input type="text" class='form-control' name="name" id="name">
+            <input type="text" class='form-control' name="name" id="name" required>
         </div>
         <div>
             <label for="price">Surname</label>
-            <input type="text" class='form-control' name="surname" id="price">
+            <input type="text" class='form-control' name="surname" id="price" required>
         </div>
         <div>
             <label for="count">Major</label>
-            <input type="text" class='form-control' name="major" id="count">
+            <input type="text" class='form-control' name="major" id="count" required>
         </div>
         <button type="submit" class='btn btn-primary mt-4'>Create</button>
     </form>
     </div>
+
+    <script>
+    function clearForm() {
+        document.getElementById('myForm').reset(); // Clear the form
+    }
+</script>
 </body>
 </html>

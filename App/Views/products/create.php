@@ -10,7 +10,13 @@
     <div class="container mt-4">
     <a href="/products" class='btn btn-primary'>Back</a>
     <h1>Product create</h1>
-    <form action="/create_pr" method="post">
+    <?php
+        if(isset($_SESSION['product_create'])){
+            echo "<div class='alert alert-success'>".$_SESSION['product_create']."</div>";
+            unset($_SESSION['student_create']);
+        }
+    ?>
+    <form action="/create_pr" id="myForm" method="post">
         <div>
             <label for="name">Name</label>
             <input type="text" class='form-control' name="name" id="name">
@@ -27,4 +33,10 @@
     </form>
     </div>
 </body>
+
+<script>
+    function clearForm() {
+        document.getElementById('myForm').reset(); // Clear the form
+    }
+</script>
 </html>

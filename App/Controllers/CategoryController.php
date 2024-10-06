@@ -3,6 +3,8 @@
     use App\Models\Product\Product;
     use App\Models\Student\Student;
 
+    session_start();
+
     class CategoryController{
         public function index(){
             include realpath(__DIR__ . "/../Views/index.php");
@@ -25,19 +27,35 @@
         }
 
         public function save_student(){
-            Student::create([
-                'name' => $_POST['name'],
-                'email' => $_POST['email'],
-                'phone' => $_POST['phone']
-            ]);
+            try{
+                Student::create([
+                    'name' => $_POST['name'],
+                    'surname' => $_POST['surname'],
+                    'major' => $_POST['major']
+                ]);
+                $_SESSION['student_create'] = 'Student created successfully';
+                ?>
+                <script>
+                    window.location.href = history.back();
+                </script>
+                <?php
+            }catch(\Exception $e){
+                echo $e->getMessage();
+            }
         }
 
         public function save_product(){
             Product::create([
                 'name' => $_POST['name'],
                 'price' => $_POST['price'],
-                'quantity' => $_POST['quantity']
+                'count' => $_POST['count']
             ]);
+            $_SESSION['product_create'] = 'Product created successfully';
+            ?>
+            <script>
+                window.location.href = history.back();
+            </script>
+            <?php
         }
     }   
 ?>
